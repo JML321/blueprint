@@ -98,5 +98,13 @@ describe("<Toast2>", () => {
                 done();
             }, 20);
         });
+
+        it("timeout={Infinity} behaves same as timeout={0} and does not trigger onDismiss", done => {
+            mount(<Toast2 message="Hello" onDismiss={handleDismiss} timeout={Infinity} />);
+            setTimeout(() => {
+                assert.isTrue(handleDismiss.notCalled, "onDismiss was called when it should not have been");
+                done();
+            }, 20);
+        });
     });
 });
